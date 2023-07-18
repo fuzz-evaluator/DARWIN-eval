@@ -7,7 +7,9 @@ uint8_t *choices;
 uint32_t weight_sum;
 uint32_t mutations_since_reweight;
 
-#define MUTATION_LOGGING 0
+#ifndef MUTATION_LOGGING
+  #define MUTATION_LOGGING 0
+#endif
 
 #if MUTATION_LOGGING == 1
 FILE *mutation_log;
