@@ -1,0 +1,3 @@
+[submodule "fuzzbench"]
+	path = fuzzbench
+	url = git@github.com:fuzz-evaluator/fuzzbench.git
