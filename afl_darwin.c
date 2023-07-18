@@ -51,8 +51,6 @@ int RAND_DARWIN_SelectOperator()
     if (mutations_since_reweight >= MUTATIONS_BEFORE_REWEIGHT) {
 #if MUTATION_LOGGING == 1
         fprintf(mutation_log, "Reweights: ");
-#else
-        printf("Reweights: ");
 #endif
         mutations_since_reweight = 0;
         weight_sum = 0;
@@ -63,14 +61,10 @@ int RAND_DARWIN_SelectOperator()
             }
 #if MUTATION_LOGGING == 1
             fprintf(mutation_log, "(%ld, %d), ", i, weight);
-#else
-            printf("(%ld, %d), ", i, weight);
 #endif
         }
 #if MUTATION_LOGGING == 1
         fprintf(mutation_log, "sum: %d\n", weight_sum);
-#else
-        printf("sum: %d\n", weight_sum);
 #endif
     } else {
         mutations_since_reweight += 1;
