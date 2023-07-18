@@ -137,9 +137,7 @@ EXP_ST u8  skip_deterministic,        /* Skip deterministic stages?       */
            run_over10m,               /* Run time over 10 minutes?        */
            persistent_mode,           /* Running in persistent mode?      */
            deferred_mode,             /* Deferred forkserver mode?        */
-           fast_cal,                  /* Try to calibrate faster?         */
-           darwin_use_splicing_mutation = 0, /* Enable splicing mutation  */
-           darwin_opt_per_seed = 0;   /* Enable splicing mutation  */
+           fast_cal;                  /* Try to calibrate faster?         */
 
 static s32 out_fd,                    /* Persistent fd for out_file       */
            dev_urandom_fd = -1,       /* Persistent fd for /dev/urandom   */
@@ -270,10 +268,6 @@ struct queue_entry {
 
   u8* trace_mini;                     /* Trace bytes, if kept             */
   u32 tc_ref;                         /* Trace bytes ref count            */
-
-  u32 src_seed;                       /* Source seed from initial corpus  */
-
-  u32 mutation_history[16];    	      /* PJ: which mutations generated the new coverage */
 
   struct queue_entry *next,           /* Next element, if any             */
                      *next_100;       /* 100 elements ahead               */
@@ -811,7 +805,7 @@ static void mark_as_redundant(struct queue_entry* q, u8 state) {
 
 /* Append new test case to the queue. */
 
-static void add_to_queue(u8* fname, u32 len, u8 passed_det, u32 src) {
+static void add_to_queue(u8* fname, u32 len, u8 passed_det) {
 
   struct queue_entry* q = ck_alloc(sizeof(struct queue_entry));
 
@@ -819,7 +813,6 @@ static void add_to_queue(u8* fname, u32 len, u8 passed_det, u32 src) {
   q->len          = len;
   q->depth        = cur_depth + 1;
   q->passed_det   = passed_det;
-  q->src_seed     = src;
 
   if (q->depth > max_depth) max_depth = q->depth;
 
@@ -1518,7 +1511,7 @@ static void read_testcases(void) {
     if (!access(dfn, F_OK)) passed_det = 1;
     ck_free(dfn);
 
-    add_to_queue(fn, st.st_size, passed_det, (u32) queued_paths); // !PJ! initial seeds -> q->src == position in queue
+    add_to_queue(fn, st.st_size, passed_det); // !PJ! initial seeds -> q->src == position in queue
   }
 
   free(nl); /* not tracked */
@@ -3078,13 +3071,13 @@ static u8* describe_op(u8 hnb) {
 
   if (syncing_party) {
 
-    sprintf(ret, "sync:%s,seed:%06u,src:%06u", syncing_party, queue_cur->src_seed, syncing_case);
+    sprintf(ret, "sync:%s,src:%06u", syncing_party, syncing_case);
     if (nr_splices > 0)
       sprintf(ret + strlen(ret), ",sp:%06u", nr_splices);
 
   } else {
 
-    sprintf(ret, "seed:%06u,src:%06u", queue_cur->src_seed, current_entry);
+    sprintf(ret, "src:%06u", current_entry);
 
     if (splicing_with >= 0)
       sprintf(ret + strlen(ret), "+%06u", splicing_with);
@@ -3196,7 +3189,7 @@ static u8 save_if_interesting(char** argv, void* mem, u32 len, u8 fault) {
 
 #endif /* ^!SIMPLE_FILES */
 
-    add_to_queue(fn, len, 0, queue_cur->src_seed); /* PJ! */
+    add_to_queue(fn, len, 0); /* PJ! */
 
     if (hnb == 2) {
       queue_top->has_new_cov = 1;
@@ -6189,7 +6182,7 @@ havoc_stage:
 
     stage_cur_val = use_stacking;
       
-    u32 mutation_chosen = DARWIN_SelectOperator(darwin_opt_per_seed ? queue_cur->src_seed : 0);
+    u32 mutation_chosen = RAND_DARWIN_SelectOperator();
  
     for (i = 0; i < use_stacking; i++) {
 
@@ -6587,9 +6580,8 @@ havoc_stage:
         perf_score *= 2;
       }
 
-      DARWIN_NotifyFeedback(darwin_opt_per_seed ? queue_cur->src_seed : 0, queued_paths - havoc_queued);
       havoc_queued = queued_paths;
-    } else DARWIN_NotifyFeedback(darwin_opt_per_seed ? queue_cur->src_seed : 0, 0);
+    }
 
   }
 
@@ -8042,11 +8034,11 @@ int main(int argc, char** argv) {
     		break;
 
       case 's':
-        darwin_use_splicing_mutation = 1;
+//        darwin_use_splicing_mutation = 1;
         break;
       
       case 'p':
-        darwin_opt_per_seed = 1;
+//        darwin_opt_per_seed = 1;
         break;
 
       default:
@@ -8119,11 +8111,11 @@ int main(int argc, char** argv) {
 
   pivot_inputs();
 
-  if (darwin_use_splicing_mutation)
-    OKF("Using splice mutation.");
-
-  if (darwin_opt_per_seed)
-    OKF("Optimizing per seed.");
+//  if (darwin_use_splicing_mutation)
+//    OKF("Using splice mutation.");
+//
+//  if (darwin_opt_per_seed)
+//    OKF("Optimizing per seed.");
 
   if (extras_dir) load_extras(extras_dir);
 
@@ -8144,9 +8136,9 @@ int main(int argc, char** argv) {
 
   perform_dry_run(use_argv);
 
-  number_mutations = 15 + (darwin_use_splicing_mutation ? 1 : 0) + ((extras_cnt + a_extras_cnt) ? 2 : 0);
+  number_mutations = 15 + ((extras_cnt + a_extras_cnt) ? 2 : 0);
 
-  DARWIN_init(queued_at_start, number_mutations);
+    RAND_DARWIN_init(number_mutations);
 
   cull_queue();
 
@@ -8251,14 +8243,7 @@ int main(int argc, char** argv) {
   save_auto();
 
 stop_fuzzing:
-  printf("ending\n");  
-  u32 darwin_val = DARWIN_get_parent_repr(0);
-  char buffer[32], *pos=buffer;
-  char *fnmut = (char *) alloc_printf("%s/darwin_last_val", out_dir);
-  FILE* f = fopen(fnmut, "w");
-  pos += sprintf(pos, "%u", darwin_val);
-  fputs(buffer, f);
-  fclose(f);
+  printf("ending\n");
 
   SAYF(CURSOR_SHOW cLRD "\n\n+++ Testing aborted %s +++\n" cRST,
        stop_soon == 2 ? "programmatically" : "by user");
