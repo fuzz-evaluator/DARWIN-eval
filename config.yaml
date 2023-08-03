@@ -20,3 +20,5 @@ report_filestore: /opt/fuzzbench-experiments/darwin-eval/report
 
 # Flag that indicates this is a local experiment.
 local_experiment: true
+
+private: true

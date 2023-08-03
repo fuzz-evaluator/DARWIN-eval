@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-EXPERIMENT_NAME=$( basename "${SCRIPT_DIR}" )
+EXPERIMENT_NAME=darwin-eval
 
 cd "${SCRIPT_DIR}/fuzzbench"
 
