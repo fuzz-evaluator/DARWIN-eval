@@ -11,11 +11,11 @@ We use DARWIN as implemented in [FuzzBench DARWIN](https://github.com/google/fuz
    * AFL 2.55b
    * MOpt
 
-1. New Baseline
+2. New Baseline:
 To test DARWIN's contribution, we replaced its weighting with a random selection with a constant reweight interval and noticed it did not perform worse than DARWIN itself. This implementation, `DARWIN-RAND`, provides a new baseline that allows to better judge DARWIN's contribution of a dynamically adapting mutation selection.
 
-2. Per-Seed Mutation Scheduling
-We contacted the DARWIN authors regarding our experimental setup. They confirmed its correctness (including the removal of *-s*), but noted that the per-seed mutation scheduling, enabled by the *-p* flag, was disabled for the evaluation as it worsens performance. To confirm this, we separately evaluated DARWIN with per-seed mutation scheduling disabled.
+3. Per-Seed Mutation Scheduling:
+We contacted the DARWIN authors regarding our experimental setup. They confirmed its correctness (including the removal of *-s*), but noted that the per-seed mutation scheduling, enabled by the *-p* flag, was disabled for the evaluation as it worsens performance. To confirm this, we separately evaluated DARWIN with per-seed mutation scheduling disabled<sup>1</sup>.
 
 ## Setup
 To reproduce our evaluation, follow these steps:
@@ -35,3 +35,7 @@ To reproduce our evaluation, follow these steps:
 
 
 The final results will be stored in `/opt/fuzzbench/fuzzbench-experiments/darwin-eval`. The runtime of the experiment is set to 24h and 10 trials -- for statistical significance we recommend a minimum of 10 trials. However, the experiment storage, the number of trials and the runtime can be adjusted in the `config.yaml` / `preseed_config.yaml`.
+
+------
+
+<sup>1</sup>Note that, due to a typo, this report is titled "preseed" and not "perseed".
