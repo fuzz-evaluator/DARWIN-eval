@@ -1,0 +1,4500 @@
+<!--
+     Copyright 2020 Google LLC
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            FuzzBench: darwin-eval report
+            
+        </title>
+
+        <!-- Import Materialize CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <!-- Import Google Material Icon Font -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    </head>
+<body>
+    <div class="container"><div class="row"><div class="col s12 m10 l10">
+
+        <h1 class="center-align brown-text text-darken-3">
+            FuzzBench: darwin-eval report
+        </h1>
+        
+        <div id="summary" class="section scrollspy">
+            <h2 class="green-text text-darken-3">experiment summary</h2>
+
+            
+
+            
+
+            We show two different aggregate (cross-benchmark) rankings of fuzzers.
+            The first is based on the average of per-benchmarks scores, where
+            the score represents the percentage of the highest reached median
+            code-coverage on a given benchmark (higher value is better).
+
+            The second ranking shows the average rank of fuzzers, after we rank
+            them on each benchmark according to their median reached
+            code-covereges (lower value is better).
+
+            <div class="row">
+                <div class="col s5 offset-s1">
+                    <h5 class="center-align">By avg. score</h5>
+                    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>average normalized score</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><a href="https://github.com/google/fuzzbench/blob/39b9e09e9d235511aac4631e49b4607db83e5236/fuzzers/darwin_rand">darwin_rand</a></th>
+      <td>99.67</td>
+    </tr>
+    <tr>
+      <th><a href="https://github.com/google/fuzzbench/blob/39b9e09e9d235511aac4631e49b4607db83e5236/fuzzers/darwin">darwin</a></th>
+      <td>99.65</td>
+    </tr>
+    <tr>
+      <th><a href="https://github.com/google/fuzzbench/blob/39b9e09e9d235511aac4631e49b4607db83e5236/fuzzers/mopt">mopt</a></th>
+      <td>99.58</td>
+    </tr>
+    <tr>
+      <th><a href="https://github.com/google/fuzzbench/blob/39b9e09e9d235511aac4631e49b4607db83e5236/fuzzers/afl_2_55_b">afl_2_55_b</a></th>
+      <td>99.33</td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+                <div class="col s5">
+                    <h5 class="center-align">By avg. rank</h5>
+                    <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>average rank</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th><a href="https://github.com/google/fuzzbench/blob/39b9e09e9d235511aac4631e49b4607db83e5236/fuzzers/darwin">darwin</a></th>
+      <td>1.83</td>
+    </tr>
+    <tr>
+      <th><a href="https://github.com/google/fuzzbench/blob/39b9e09e9d235511aac4631e49b4607db83e5236/fuzzers/darwin_rand">darwin_rand</a></th>
+      <td>1.94</td>
+    </tr>
+    <tr>
+      <th><a href="https://github.com/google/fuzzbench/blob/39b9e09e9d235511aac4631e49b4607db83e5236/fuzzers/mopt">mopt</a></th>
+      <td>2.39</td>
+    </tr>
+    <tr>
+      <th><a href="https://github.com/google/fuzzbench/blob/39b9e09e9d235511aac4631e49b4607db83e5236/fuzzers/afl_2_55_b">afl_2_55_b</a></th>
+      <td>2.78</td>
+    </tr>
+  </tbody>
+</table>
+                </div>
+            </div>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Critical difference diagram
+                    </div>
+                    <div class="collapsible-body">
+
+
+            
+
+            The diagram visualizes the average rank of fuzzers (second ranking
+            above) while showing the significance of the differences as well.
+            What is considered a "critical difference" (CD) is based on the
+            Friedman/Nemenyi post-hoc test. See more in the <a
+            href="https://google.github.io/fuzzbench/reference/report/">
+            documentation</a>.
+
+            <br>
+
+            <div class="row">
+                <div class="col s7 offset-s3">
+                    <img class="responsive-img materialboxed"
+                         src="experiment_critical_difference_plot.svg">
+                </div>
+            </div>
+
+            Note: If a fuzzer does not support all benchmarks, its ranking as
+            shown in this diagram can be lower than it should be. So please
+            check the list of supported benchmarks for the fuzzer(s) of your interest.
+            The list could be specified in the fuzzer's README.md like
+            <a href="https://github.com/google/fuzzbench/blob/master/fuzzers/aflsmart/README.md">this</a>.
+
+             
+
+                    </div>
+                </li>
+            </ul>
+
+             
+
+             
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Median relative code-coverages on each benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <p style="margin-bottom:3cm;">
+                      <strong>Note:</strong> The relative coverage summary table shows the median
+                      relative performance of each fuzzer to the <em>experiment maximum</em>.  Thus the 
+                      highest relative performance may not be 100%.<br>
+                      <code> trial_relative_coverage  = trial_coverage / experiment_max_coverage</code><br>
+                        </p>
+                        <style type="text/css">
+#T_d2b48 td {
+  width: 25px;
+  padding: 7px 5px;
+}
+#T_d2b48  th {
+  width: 25px;
+  padding: 7px 5px;
+}
+#T_d2b48 th.col_heading {
+  max-width: 25px;
+  overflow: visible;
+  transform-origin: bottom left;
+  transform: translateX(20px) rotate(-45deg);
+}
+#T_d2b48_row0_col0, #T_d2b48_row0_col1, #T_d2b48_row0_col2, #T_d2b48_row0_col3, #T_d2b48_row8_col0, #T_d2b48_row8_col1, #T_d2b48_row8_col2, #T_d2b48_row8_col3, #T_d2b48_row10_col0, #T_d2b48_row10_col1, #T_d2b48_row13_col0, #T_d2b48_row13_col1, #T_d2b48_row13_col2, #T_d2b48_row13_col3, #T_d2b48_row16_col0, #T_d2b48_row16_col1, #T_d2b48_row16_col2, #T_d2b48_row16_col3 {
+  background-color: #c7e2eb;
+  color: #000000;
+  background-color: lightgreen;
+}
+#T_d2b48_row1_col0, #T_d2b48_row1_col1 {
+  background-color: #d2e6ec;
+  color: #000000;
+  background-color: lightgreen;
+  border-bottom: 3px solid black;
+}
+#T_d2b48_row1_col2 {
+  background-color: #d3e6ed;
+  color: #000000;
+  border-bottom: 3px solid black;
+}
+#T_d2b48_row1_col3 {
+  background-color: #d5e7ed;
+  color: #000000;
+  border-bottom: 3px solid black;
+}
+#T_d2b48_row2_col0, #T_d2b48_row2_col2, #T_d2b48_row4_col1, #T_d2b48_row4_col3 {
+  background-color: #e2ecef;
+  color: #000000;
+}
+#T_d2b48_row2_col1, #T_d2b48_row4_col0, #T_d2b48_row4_col2, #T_d2b48_row19_col0, #T_d2b48_row19_col1, #T_d2b48_row19_col2, #T_d2b48_row19_col3 {
+  background-color: #d5e7ed;
+  color: #000000;
+  background-color: lightgreen;
+}
+#T_d2b48_row2_col3, #T_d2b48_row15_col0, #T_d2b48_row15_col1 {
+  background-color: #eff1f2;
+  color: #000000;
+}
+#T_d2b48_row3_col0, #T_d2b48_row5_col0, #T_d2b48_row5_col1, #T_d2b48_row6_col0, #T_d2b48_row6_col1, #T_d2b48_row6_col2, #T_d2b48_row6_col3, #T_d2b48_row7_col0, #T_d2b48_row7_col1, #T_d2b48_row7_col2, #T_d2b48_row7_col3, #T_d2b48_row9_col3, #T_d2b48_row11_col0, #T_d2b48_row11_col1, #T_d2b48_row11_col2, #T_d2b48_row11_col3, #T_d2b48_row14_col0, #T_d2b48_row14_col1, #T_d2b48_row14_col2, #T_d2b48_row14_col3, #T_d2b48_row17_col0, #T_d2b48_row17_col1, #T_d2b48_row17_col2, #T_d2b48_row17_col3, #T_d2b48_row18_col0, #T_d2b48_row18_col1 {
+  background-color: #badde8;
+  color: #000000;
+  background-color: lightgreen;
+}
+#T_d2b48_row3_col1, #T_d2b48_row3_col2, #T_d2b48_row3_col3, #T_d2b48_row5_col2, #T_d2b48_row5_col3, #T_d2b48_row9_col0, #T_d2b48_row9_col1, #T_d2b48_row9_col2, #T_d2b48_row18_col2, #T_d2b48_row18_col3 {
+  background-color: #c7e2eb;
+  color: #000000;
+}
+#T_d2b48_row10_col2, #T_d2b48_row10_col3 {
+  background-color: #d5e7ed;
+  color: #000000;
+}
+#T_d2b48_row12_col0, #T_d2b48_row12_col1, #T_d2b48_row12_col2, #T_d2b48_row12_col3 {
+  background-color: #eff1f2;
+  color: #000000;
+  background-color: lightgreen;
+}
+#T_d2b48_row15_col2, #T_d2b48_row15_col3 {
+  background-color: #e2ecef;
+  color: #000000;
+  background-color: lightgreen;
+}
+</style>
+<table id="T_d2b48">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_d2b48_level0_col0" class="col_heading level0 col0" >darwin</th>
+      <th id="T_d2b48_level0_col1" class="col_heading level0 col1" >darwin_rand</th>
+      <th id="T_d2b48_level0_col2" class="col_heading level0 col2" >mopt</th>
+      <th id="T_d2b48_level0_col3" class="col_heading level0 col3" >afl_2_55_b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_d2b48_level0_row0" class="row_heading level0 row0" >FuzzerMedian</th>
+      <td id="T_d2b48_row0_col0" class="data row0 col0" >98.00</td>
+      <td id="T_d2b48_row0_col1" class="data row0 col1" >98.00</td>
+      <td id="T_d2b48_row0_col2" class="data row0 col2" >98.00</td>
+      <td id="T_d2b48_row0_col3" class="data row0 col3" >98.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row1" class="row_heading level0 row1" >FuzzerMean</th>
+      <td id="T_d2b48_row1_col0" class="data row1 col0" >97.22</td>
+      <td id="T_d2b48_row1_col1" class="data row1 col1" >97.22</td>
+      <td id="T_d2b48_row1_col2" class="data row1 col2" >97.11</td>
+      <td id="T_d2b48_row1_col3" class="data row1 col3" >96.94</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row2" class="row_heading level0 row2" >bloaty_fuzz_target</th>
+      <td id="T_d2b48_row2_col0" class="data row2 col0" >96.00</td>
+      <td id="T_d2b48_row2_col1" class="data row2 col1" >97.00</td>
+      <td id="T_d2b48_row2_col2" class="data row2 col2" >96.00</td>
+      <td id="T_d2b48_row2_col3" class="data row2 col3" >93.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row3" class="row_heading level0 row3" >curl_curl_fuzzer_http</th>
+      <td id="T_d2b48_row3_col0" class="data row3 col0" >99.00</td>
+      <td id="T_d2b48_row3_col1" class="data row3 col1" >98.00</td>
+      <td id="T_d2b48_row3_col2" class="data row3 col2" >98.00</td>
+      <td id="T_d2b48_row3_col3" class="data row3 col3" >98.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row4" class="row_heading level0 row4" >freetype2_ftfuzzer</th>
+      <td id="T_d2b48_row4_col0" class="data row4 col0" >97.00</td>
+      <td id="T_d2b48_row4_col1" class="data row4 col1" >96.00</td>
+      <td id="T_d2b48_row4_col2" class="data row4 col2" >97.00</td>
+      <td id="T_d2b48_row4_col3" class="data row4 col3" >96.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row5" class="row_heading level0 row5" >harfbuzz_hb-shape-fuzzer</th>
+      <td id="T_d2b48_row5_col0" class="data row5 col0" >99.00</td>
+      <td id="T_d2b48_row5_col1" class="data row5 col1" >99.00</td>
+      <td id="T_d2b48_row5_col2" class="data row5 col2" >98.00</td>
+      <td id="T_d2b48_row5_col3" class="data row5 col3" >98.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row6" class="row_heading level0 row6" >libjpeg-turbo_libjpeg_turbo_fuzzer</th>
+      <td id="T_d2b48_row6_col0" class="data row6 col0" >99.00</td>
+      <td id="T_d2b48_row6_col1" class="data row6 col1" >99.00</td>
+      <td id="T_d2b48_row6_col2" class="data row6 col2" >99.00</td>
+      <td id="T_d2b48_row6_col3" class="data row6 col3" >99.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row7" class="row_heading level0 row7" >libpng_libpng_read_fuzzer</th>
+      <td id="T_d2b48_row7_col0" class="data row7 col0" >99.00</td>
+      <td id="T_d2b48_row7_col1" class="data row7 col1" >99.00</td>
+      <td id="T_d2b48_row7_col2" class="data row7 col2" >99.00</td>
+      <td id="T_d2b48_row7_col3" class="data row7 col3" >99.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row8" class="row_heading level0 row8" >libxml2_xml</th>
+      <td id="T_d2b48_row8_col0" class="data row8 col0" >98.00</td>
+      <td id="T_d2b48_row8_col1" class="data row8 col1" >98.00</td>
+      <td id="T_d2b48_row8_col2" class="data row8 col2" >98.00</td>
+      <td id="T_d2b48_row8_col3" class="data row8 col3" >98.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row9" class="row_heading level0 row9" >libxslt_xpath</th>
+      <td id="T_d2b48_row9_col0" class="data row9 col0" >98.00</td>
+      <td id="T_d2b48_row9_col1" class="data row9 col1" >98.00</td>
+      <td id="T_d2b48_row9_col2" class="data row9 col2" >98.00</td>
+      <td id="T_d2b48_row9_col3" class="data row9 col3" >99.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row10" class="row_heading level0 row10" >mbedtls_fuzz_dtlsclient</th>
+      <td id="T_d2b48_row10_col0" class="data row10 col0" >98.00</td>
+      <td id="T_d2b48_row10_col1" class="data row10 col1" >98.00</td>
+      <td id="T_d2b48_row10_col2" class="data row10 col2" >97.00</td>
+      <td id="T_d2b48_row10_col3" class="data row10 col3" >97.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row11" class="row_heading level0 row11" >openssl_x509</th>
+      <td id="T_d2b48_row11_col0" class="data row11 col0" >99.00</td>
+      <td id="T_d2b48_row11_col1" class="data row11 col1" >99.00</td>
+      <td id="T_d2b48_row11_col2" class="data row11 col2" >99.00</td>
+      <td id="T_d2b48_row11_col3" class="data row11 col3" >99.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row12" class="row_heading level0 row12" >openthread_ot-ip6-send-fuzzer</th>
+      <td id="T_d2b48_row12_col0" class="data row12 col0" >84.00</td>
+      <td id="T_d2b48_row12_col1" class="data row12 col1" >84.00</td>
+      <td id="T_d2b48_row12_col2" class="data row12 col2" >84.00</td>
+      <td id="T_d2b48_row12_col3" class="data row12 col3" >84.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row13" class="row_heading level0 row13" >proj4_proj_crs_to_crs_fuzzer</th>
+      <td id="T_d2b48_row13_col0" class="data row13 col0" >98.00</td>
+      <td id="T_d2b48_row13_col1" class="data row13 col1" >98.00</td>
+      <td id="T_d2b48_row13_col2" class="data row13 col2" >98.00</td>
+      <td id="T_d2b48_row13_col3" class="data row13 col3" >98.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row14" class="row_heading level0 row14" >re2_fuzzer</th>
+      <td id="T_d2b48_row14_col0" class="data row14 col0" >99.00</td>
+      <td id="T_d2b48_row14_col1" class="data row14 col1" >99.00</td>
+      <td id="T_d2b48_row14_col2" class="data row14 col2" >99.00</td>
+      <td id="T_d2b48_row14_col3" class="data row14 col3" >99.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row15" class="row_heading level0 row15" >sqlite3_ossfuzz</th>
+      <td id="T_d2b48_row15_col0" class="data row15 col0" >94.00</td>
+      <td id="T_d2b48_row15_col1" class="data row15 col1" >95.00</td>
+      <td id="T_d2b48_row15_col2" class="data row15 col2" >96.00</td>
+      <td id="T_d2b48_row15_col3" class="data row15 col3" >96.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row16" class="row_heading level0 row16" >systemd_fuzz-link-parser</th>
+      <td id="T_d2b48_row16_col0" class="data row16 col0" >98.00</td>
+      <td id="T_d2b48_row16_col1" class="data row16 col1" >98.00</td>
+      <td id="T_d2b48_row16_col2" class="data row16 col2" >98.00</td>
+      <td id="T_d2b48_row16_col3" class="data row16 col3" >98.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row17" class="row_heading level0 row17" >vorbis_decode_fuzzer</th>
+      <td id="T_d2b48_row17_col0" class="data row17 col0" >99.00</td>
+      <td id="T_d2b48_row17_col1" class="data row17 col1" >99.00</td>
+      <td id="T_d2b48_row17_col2" class="data row17 col2" >99.00</td>
+      <td id="T_d2b48_row17_col3" class="data row17 col3" >99.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row18" class="row_heading level0 row18" >woff2_convert_woff2ttf_fuzzer</th>
+      <td id="T_d2b48_row18_col0" class="data row18 col0" >99.00</td>
+      <td id="T_d2b48_row18_col1" class="data row18 col1" >99.00</td>
+      <td id="T_d2b48_row18_col2" class="data row18 col2" >98.00</td>
+      <td id="T_d2b48_row18_col3" class="data row18 col3" >98.00</td>
+    </tr>
+    <tr>
+      <th id="T_d2b48_level0_row19" class="row_heading level0 row19" >zlib_zlib_uncompress_fuzzer</th>
+      <td id="T_d2b48_row19_col0" class="data row19 col0" >97.00</td>
+      <td id="T_d2b48_row19_col1" class="data row19 col1" >97.00</td>
+      <td id="T_d2b48_row19_col2" class="data row19 col2" >97.00</td>
+      <td id="T_d2b48_row19_col3" class="data row19 col3" >97.00</td>
+    </tr>
+  </tbody>
+</table>
+
+                      <ul>
+                          <li> Fuzzers are sorted by "FuzzerMean" (average median relative coverage), highest on the left.</li>
+                          <li> Green background = highest relative median coverage.</li>
+                          <li> Blue gradient background = greater than 95% relative median coverage.</li>
+                      </ul>
+                    </div>
+                </li>
+            </ul>
+
+            
+
+        </div> <!-- id="summary" -->
+
+        
+
+        <div id="bloaty_fuzz_target" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">bloaty_fuzz_target summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="bloaty_fuzz_target_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="bloaty_fuzz_target_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#bloaty_fuzz_target_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#bloaty_fuzz_target_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="bloaty_fuzz_target_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="bloaty_fuzz_target_coverage_growth.svg">
+                </div>
+                <div id="bloaty_fuzz_target_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="bloaty_fuzz_target_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>6262.6</td>
+      <td>77.867694</td>
+      <td>6128.0</td>
+      <td>6244.50</td>
+      <td>6266.0</td>
+      <td>6293.00</td>
+      <td>6419.0</td>
+    </tr>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>6216.6</td>
+      <td>118.057613</td>
+      <td>5995.0</td>
+      <td>6191.25</td>
+      <td>6221.5</td>
+      <td>6258.50</td>
+      <td>6442.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>6193.9</td>
+      <td>119.418452</td>
+      <td>6032.0</td>
+      <td>6103.00</td>
+      <td>6188.0</td>
+      <td>6268.50</td>
+      <td>6400.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>5994.7</td>
+      <td>111.354339</td>
+      <td>5816.0</td>
+      <td>5917.00</td>
+      <td>6039.5</td>
+      <td>6054.25</td>
+      <td>6138.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="bloaty_fuzz_target_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="bloaty_fuzz_target_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="bloaty_fuzz_target_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="bloaty_fuzz_target_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/bloaty_fuzz_target/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/bloaty_fuzz_target/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/bloaty_fuzz_target/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/bloaty_fuzz_target/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="bloaty_fuzz_target" -->
+        
+
+        <div id="curl_curl_fuzzer_http" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">curl_curl_fuzzer_http summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="curl_curl_fuzzer_http_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="curl_curl_fuzzer_http_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#curl_curl_fuzzer_http_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#curl_curl_fuzzer_http_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="curl_curl_fuzzer_http_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="curl_curl_fuzzer_http_coverage_growth.svg">
+                </div>
+                <div id="curl_curl_fuzzer_http_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="curl_curl_fuzzer_http_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>10402.0</td>
+      <td>44.674129</td>
+      <td>10355.0</td>
+      <td>10370.25</td>
+      <td>10394.5</td>
+      <td>10411.00</td>
+      <td>10499.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>10402.7</td>
+      <td>44.914858</td>
+      <td>10343.0</td>
+      <td>10374.75</td>
+      <td>10392.5</td>
+      <td>10434.25</td>
+      <td>10472.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>10370.5</td>
+      <td>48.021407</td>
+      <td>10305.0</td>
+      <td>10337.75</td>
+      <td>10353.0</td>
+      <td>10413.50</td>
+      <td>10450.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>10361.7</td>
+      <td>65.733553</td>
+      <td>10270.0</td>
+      <td>10322.25</td>
+      <td>10350.0</td>
+      <td>10407.75</td>
+      <td>10483.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="curl_curl_fuzzer_http_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="curl_curl_fuzzer_http_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="curl_curl_fuzzer_http_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="curl_curl_fuzzer_http_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/curl_curl_fuzzer_http/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/curl_curl_fuzzer_http/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/curl_curl_fuzzer_http/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/curl_curl_fuzzer_http/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="curl_curl_fuzzer_http" -->
+        
+
+        <div id="freetype2_ftfuzzer" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">freetype2_ftfuzzer summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="freetype2_ftfuzzer_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="freetype2_ftfuzzer_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#freetype2_ftfuzzer_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#freetype2_ftfuzzer_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="freetype2_ftfuzzer_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="freetype2_ftfuzzer_coverage_growth.svg">
+                </div>
+                <div id="freetype2_ftfuzzer_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="freetype2_ftfuzzer_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>8112.9</td>
+      <td>311.414497</td>
+      <td>7618.0</td>
+      <td>7887.25</td>
+      <td>8254.0</td>
+      <td>8308.0</td>
+      <td>8425.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>8157.8</td>
+      <td>195.520275</td>
+      <td>7775.0</td>
+      <td>8021.00</td>
+      <td>8224.0</td>
+      <td>8316.0</td>
+      <td>8345.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>8122.6</td>
+      <td>228.320048</td>
+      <td>7807.0</td>
+      <td>7928.50</td>
+      <td>8122.0</td>
+      <td>8274.5</td>
+      <td>8443.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>8062.2</td>
+      <td>269.258158</td>
+      <td>7698.0</td>
+      <td>7811.25</td>
+      <td>8115.0</td>
+      <td>8286.5</td>
+      <td>8402.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="freetype2_ftfuzzer_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="freetype2_ftfuzzer_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="freetype2_ftfuzzer_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="freetype2_ftfuzzer_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/freetype2_ftfuzzer/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/freetype2_ftfuzzer/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/freetype2_ftfuzzer/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/freetype2_ftfuzzer/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="freetype2_ftfuzzer" -->
+        
+
+        <div id="harfbuzz_hb-shape-fuzzer" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">harfbuzz_hb-shape-fuzzer summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="harfbuzz_hb-shape-fuzzer_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="harfbuzz_hb-shape-fuzzer_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#harfbuzz_hb-shape-fuzzer_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#harfbuzz_hb-shape-fuzzer_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="harfbuzz_hb-shape-fuzzer_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="harfbuzz_hb-shape-fuzzer_coverage_growth.svg">
+                </div>
+                <div id="harfbuzz_hb-shape-fuzzer_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="harfbuzz_hb-shape-fuzzer_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>10888.8</td>
+      <td>30.330769</td>
+      <td>10834.0</td>
+      <td>10870.50</td>
+      <td>10895.0</td>
+      <td>10911.25</td>
+      <td>10928.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>10854.5</td>
+      <td>48.449860</td>
+      <td>10785.0</td>
+      <td>10813.75</td>
+      <td>10864.0</td>
+      <td>10889.75</td>
+      <td>10916.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>10781.7</td>
+      <td>48.696452</td>
+      <td>10702.0</td>
+      <td>10768.25</td>
+      <td>10772.5</td>
+      <td>10811.00</td>
+      <td>10859.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>10731.3</td>
+      <td>64.529149</td>
+      <td>10636.0</td>
+      <td>10678.25</td>
+      <td>10734.5</td>
+      <td>10783.25</td>
+      <td>10817.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="harfbuzz_hb-shape-fuzzer_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="harfbuzz_hb-shape-fuzzer_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="harfbuzz_hb-shape-fuzzer_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="harfbuzz_hb-shape-fuzzer_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/harfbuzz_hb-shape-fuzzer/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/harfbuzz_hb-shape-fuzzer/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/harfbuzz_hb-shape-fuzzer/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/harfbuzz_hb-shape-fuzzer/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="harfbuzz_hb-shape-fuzzer" -->
+        
+
+        <div id="libjpeg-turbo_libjpeg_turbo_fuzzer" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">libjpeg-turbo_libjpeg_turbo_fuzzer summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libjpeg-turbo_libjpeg_turbo_fuzzer_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libjpeg-turbo_libjpeg_turbo_fuzzer_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#libjpeg-turbo_libjpeg_turbo_fuzzer_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#libjpeg-turbo_libjpeg_turbo_fuzzer_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="libjpeg-turbo_libjpeg_turbo_fuzzer_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libjpeg-turbo_libjpeg_turbo_fuzzer_coverage_growth.svg">
+                </div>
+                <div id="libjpeg-turbo_libjpeg_turbo_fuzzer_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libjpeg-turbo_libjpeg_turbo_fuzzer_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>3065.0</td>
+      <td>24.895336</td>
+      <td>3016.0</td>
+      <td>3068.00</td>
+      <td>3078.0</td>
+      <td>3078.00</td>
+      <td>3080.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>3065.2</td>
+      <td>27.812068</td>
+      <td>3012.0</td>
+      <td>3075.75</td>
+      <td>3078.0</td>
+      <td>3079.00</td>
+      <td>3080.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>3064.0</td>
+      <td>26.587382</td>
+      <td>3014.0</td>
+      <td>3069.75</td>
+      <td>3076.0</td>
+      <td>3078.75</td>
+      <td>3081.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>3054.1</td>
+      <td>30.613904</td>
+      <td>3011.0</td>
+      <td>3020.50</td>
+      <td>3075.0</td>
+      <td>3077.75</td>
+      <td>3079.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libjpeg-turbo_libjpeg_turbo_fuzzer_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libjpeg-turbo_libjpeg_turbo_fuzzer_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libjpeg-turbo_libjpeg_turbo_fuzzer_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libjpeg-turbo_libjpeg_turbo_fuzzer_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libjpeg-turbo_libjpeg_turbo_fuzzer/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libjpeg-turbo_libjpeg_turbo_fuzzer/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libjpeg-turbo_libjpeg_turbo_fuzzer/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libjpeg-turbo_libjpeg_turbo_fuzzer/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="libjpeg-turbo_libjpeg_turbo_fuzzer" -->
+        
+
+        <div id="libpng_libpng_read_fuzzer" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">libpng_libpng_read_fuzzer summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libpng_libpng_read_fuzzer_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libpng_libpng_read_fuzzer_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#libpng_libpng_read_fuzzer_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#libpng_libpng_read_fuzzer_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="libpng_libpng_read_fuzzer_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libpng_libpng_read_fuzzer_coverage_growth.svg">
+                </div>
+                <div id="libpng_libpng_read_fuzzer_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libpng_libpng_read_fuzzer_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>1993.6</td>
+      <td>8.194849</td>
+      <td>1972.0</td>
+      <td>1993.25</td>
+      <td>1996.0</td>
+      <td>1998.0</td>
+      <td>2001.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>1990.6</td>
+      <td>9.465728</td>
+      <td>1974.0</td>
+      <td>1990.25</td>
+      <td>1992.5</td>
+      <td>1996.0</td>
+      <td>2002.0</td>
+    </tr>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>1988.1</td>
+      <td>12.341889</td>
+      <td>1969.0</td>
+      <td>1977.25</td>
+      <td>1992.0</td>
+      <td>1997.5</td>
+      <td>2002.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>1984.2</td>
+      <td>17.280689</td>
+      <td>1944.0</td>
+      <td>1975.25</td>
+      <td>1992.0</td>
+      <td>1996.5</td>
+      <td>2000.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libpng_libpng_read_fuzzer_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libpng_libpng_read_fuzzer_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libpng_libpng_read_fuzzer_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libpng_libpng_read_fuzzer_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libpng_libpng_read_fuzzer/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libpng_libpng_read_fuzzer/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libpng_libpng_read_fuzzer/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libpng_libpng_read_fuzzer/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="libpng_libpng_read_fuzzer" -->
+        
+
+        <div id="libxml2_xml" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">libxml2_xml summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libxml2_xml_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libxml2_xml_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#libxml2_xml_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#libxml2_xml_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="libxml2_xml_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libxml2_xml_coverage_growth.svg">
+                </div>
+                <div id="libxml2_xml_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libxml2_xml_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>15370.2</td>
+      <td>81.870901</td>
+      <td>15229.0</td>
+      <td>15312.00</td>
+      <td>15365.0</td>
+      <td>15438.75</td>
+      <td>15486.0</td>
+    </tr>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>15338.1</td>
+      <td>114.479935</td>
+      <td>15188.0</td>
+      <td>15227.25</td>
+      <td>15355.0</td>
+      <td>15417.75</td>
+      <td>15528.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>15323.6</td>
+      <td>75.963734</td>
+      <td>15206.0</td>
+      <td>15251.75</td>
+      <td>15346.0</td>
+      <td>15386.75</td>
+      <td>15392.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>15290.4</td>
+      <td>78.642934</td>
+      <td>15197.0</td>
+      <td>15219.50</td>
+      <td>15287.0</td>
+      <td>15367.25</td>
+      <td>15392.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libxml2_xml_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libxml2_xml_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libxml2_xml_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libxml2_xml_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libxml2_xml/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libxml2_xml/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libxml2_xml/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libxml2_xml/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="libxml2_xml" -->
+        
+
+        <div id="libxslt_xpath" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">libxslt_xpath summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libxslt_xpath_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libxslt_xpath_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#libxslt_xpath_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#libxslt_xpath_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="libxslt_xpath_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libxslt_xpath_coverage_growth.svg">
+                </div>
+                <div id="libxslt_xpath_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="libxslt_xpath_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>10786.4</td>
+      <td>39.724608</td>
+      <td>10722.0</td>
+      <td>10763.25</td>
+      <td>10793.0</td>
+      <td>10807.75</td>
+      <td>10855.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>10687.1</td>
+      <td>104.992539</td>
+      <td>10424.0</td>
+      <td>10661.75</td>
+      <td>10712.5</td>
+      <td>10754.75</td>
+      <td>10784.0</td>
+    </tr>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>10656.4</td>
+      <td>69.760224</td>
+      <td>10532.0</td>
+      <td>10607.25</td>
+      <td>10671.5</td>
+      <td>10712.25</td>
+      <td>10729.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>10662.0</td>
+      <td>55.214732</td>
+      <td>10564.0</td>
+      <td>10629.50</td>
+      <td>10662.0</td>
+      <td>10688.25</td>
+      <td>10749.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libxslt_xpath_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libxslt_xpath_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libxslt_xpath_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="libxslt_xpath_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libxslt_xpath/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libxslt_xpath/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libxslt_xpath/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/libxslt_xpath/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="libxslt_xpath" -->
+        
+
+        <div id="mbedtls_fuzz_dtlsclient" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">mbedtls_fuzz_dtlsclient summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="mbedtls_fuzz_dtlsclient_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="mbedtls_fuzz_dtlsclient_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#mbedtls_fuzz_dtlsclient_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#mbedtls_fuzz_dtlsclient_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="mbedtls_fuzz_dtlsclient_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="mbedtls_fuzz_dtlsclient_coverage_growth.svg">
+                </div>
+                <div id="mbedtls_fuzz_dtlsclient_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="mbedtls_fuzz_dtlsclient_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>2730.2</td>
+      <td>17.687409</td>
+      <td>2696.0</td>
+      <td>2723.75</td>
+      <td>2734.5</td>
+      <td>2742.00</td>
+      <td>2750.0</td>
+    </tr>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>2728.2</td>
+      <td>21.724538</td>
+      <td>2700.0</td>
+      <td>2722.00</td>
+      <td>2726.5</td>
+      <td>2733.75</td>
+      <td>2776.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>2705.3</td>
+      <td>30.051992</td>
+      <td>2656.0</td>
+      <td>2695.00</td>
+      <td>2699.0</td>
+      <td>2713.00</td>
+      <td>2767.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>2689.9</td>
+      <td>18.882385</td>
+      <td>2654.0</td>
+      <td>2685.50</td>
+      <td>2694.5</td>
+      <td>2701.25</td>
+      <td>2716.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="mbedtls_fuzz_dtlsclient_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="mbedtls_fuzz_dtlsclient_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="mbedtls_fuzz_dtlsclient_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="mbedtls_fuzz_dtlsclient_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/mbedtls_fuzz_dtlsclient/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/mbedtls_fuzz_dtlsclient/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/mbedtls_fuzz_dtlsclient/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/mbedtls_fuzz_dtlsclient/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="mbedtls_fuzz_dtlsclient" -->
+        
+
+        <div id="openssl_x509" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">openssl_x509 summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="openssl_x509_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="openssl_x509_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#openssl_x509_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#openssl_x509_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="openssl_x509_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="openssl_x509_coverage_growth.svg">
+                </div>
+                <div id="openssl_x509_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="openssl_x509_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>5830.5</td>
+      <td>1.080123</td>
+      <td>5829.0</td>
+      <td>5829.50</td>
+      <td>5831.0</td>
+      <td>5831.00</td>
+      <td>5832.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>5829.0</td>
+      <td>2.403701</td>
+      <td>5825.0</td>
+      <td>5828.25</td>
+      <td>5829.5</td>
+      <td>5830.75</td>
+      <td>5832.0</td>
+    </tr>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>5830.1</td>
+      <td>1.286684</td>
+      <td>5829.0</td>
+      <td>5829.00</td>
+      <td>5829.5</td>
+      <td>5831.00</td>
+      <td>5832.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>5827.9</td>
+      <td>3.446415</td>
+      <td>5819.0</td>
+      <td>5828.00</td>
+      <td>5829.0</td>
+      <td>5829.00</td>
+      <td>5831.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="openssl_x509_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="openssl_x509_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="openssl_x509_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="openssl_x509_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/openssl_x509/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/openssl_x509/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/openssl_x509/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/openssl_x509/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="openssl_x509" -->
+        
+
+        <div id="openthread_ot-ip6-send-fuzzer" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">openthread_ot-ip6-send-fuzzer summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="openthread_ot-ip6-send-fuzzer_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="openthread_ot-ip6-send-fuzzer_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#openthread_ot-ip6-send-fuzzer_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#openthread_ot-ip6-send-fuzzer_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="openthread_ot-ip6-send-fuzzer_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="openthread_ot-ip6-send-fuzzer_coverage_growth.svg">
+                </div>
+                <div id="openthread_ot-ip6-send-fuzzer_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="openthread_ot-ip6-send-fuzzer_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>2928.2</td>
+      <td>78.050980</td>
+      <td>2831.0</td>
+      <td>2904.0</td>
+      <td>2914.0</td>
+      <td>2928.75</td>
+      <td>3062.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>2906.5</td>
+      <td>6.570134</td>
+      <td>2897.0</td>
+      <td>2901.5</td>
+      <td>2907.0</td>
+      <td>2911.00</td>
+      <td>2917.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>2953.8</td>
+      <td>189.737128</td>
+      <td>2819.0</td>
+      <td>2826.0</td>
+      <td>2905.5</td>
+      <td>3002.50</td>
+      <td>3437.0</td>
+    </tr>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>2844.3</td>
+      <td>210.062980</td>
+      <td>2247.0</td>
+      <td>2902.5</td>
+      <td>2905.5</td>
+      <td>2916.50</td>
+      <td>2926.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="openthread_ot-ip6-send-fuzzer_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="openthread_ot-ip6-send-fuzzer_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="openthread_ot-ip6-send-fuzzer_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="openthread_ot-ip6-send-fuzzer_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/openthread_ot-ip6-send-fuzzer/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/openthread_ot-ip6-send-fuzzer/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/openthread_ot-ip6-send-fuzzer/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/openthread_ot-ip6-send-fuzzer/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="openthread_ot-ip6-send-fuzzer" -->
+        
+
+        <div id="proj4_proj_crs_to_crs_fuzzer" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">proj4_proj_crs_to_crs_fuzzer summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="proj4_proj_crs_to_crs_fuzzer_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="proj4_proj_crs_to_crs_fuzzer_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#proj4_proj_crs_to_crs_fuzzer_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#proj4_proj_crs_to_crs_fuzzer_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="proj4_proj_crs_to_crs_fuzzer_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="proj4_proj_crs_to_crs_fuzzer_coverage_growth.svg">
+                </div>
+                <div id="proj4_proj_crs_to_crs_fuzzer_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="proj4_proj_crs_to_crs_fuzzer_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>795.8</td>
+      <td>33.940471</td>
+      <td>732.0</td>
+      <td>806.25</td>
+      <td>807.5</td>
+      <td>815.75</td>
+      <td>819.0</td>
+    </tr>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>795.9</td>
+      <td>31.883294</td>
+      <td>732.0</td>
+      <td>807.00</td>
+      <td>807.5</td>
+      <td>814.25</td>
+      <td>817.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>778.8</td>
+      <td>40.168534</td>
+      <td>731.0</td>
+      <td>732.50</td>
+      <td>807.0</td>
+      <td>808.00</td>
+      <td>816.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>744.6</td>
+      <td>135.294083</td>
+      <td>488.0</td>
+      <td>806.00</td>
+      <td>807.0</td>
+      <td>807.75</td>
+      <td>819.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="proj4_proj_crs_to_crs_fuzzer_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="proj4_proj_crs_to_crs_fuzzer_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="proj4_proj_crs_to_crs_fuzzer_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="proj4_proj_crs_to_crs_fuzzer_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/proj4_proj_crs_to_crs_fuzzer/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/proj4_proj_crs_to_crs_fuzzer/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/proj4_proj_crs_to_crs_fuzzer/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/proj4_proj_crs_to_crs_fuzzer/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="proj4_proj_crs_to_crs_fuzzer" -->
+        
+
+        <div id="re2_fuzzer" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">re2_fuzzer summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="re2_fuzzer_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="re2_fuzzer_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#re2_fuzzer_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#re2_fuzzer_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="re2_fuzzer_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="re2_fuzzer_coverage_growth.svg">
+                </div>
+                <div id="re2_fuzzer_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="re2_fuzzer_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>2868.1</td>
+      <td>2.766867</td>
+      <td>2865.0</td>
+      <td>2866.25</td>
+      <td>2867.5</td>
+      <td>2868.0</td>
+      <td>2873.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>2865.7</td>
+      <td>4.083844</td>
+      <td>2858.0</td>
+      <td>2864.25</td>
+      <td>2867.0</td>
+      <td>2868.5</td>
+      <td>2871.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>2865.0</td>
+      <td>7.149204</td>
+      <td>2854.0</td>
+      <td>2859.25</td>
+      <td>2864.5</td>
+      <td>2870.5</td>
+      <td>2877.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>2858.3</td>
+      <td>6.600505</td>
+      <td>2848.0</td>
+      <td>2853.25</td>
+      <td>2858.5</td>
+      <td>2862.5</td>
+      <td>2868.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="re2_fuzzer_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="re2_fuzzer_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="re2_fuzzer_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="re2_fuzzer_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/re2_fuzzer/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/re2_fuzzer/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/re2_fuzzer/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/re2_fuzzer/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="re2_fuzzer" -->
+        
+
+        <div id="sqlite3_ossfuzz" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">sqlite3_ossfuzz summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="sqlite3_ossfuzz_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="sqlite3_ossfuzz_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#sqlite3_ossfuzz_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#sqlite3_ossfuzz_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="sqlite3_ossfuzz_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="sqlite3_ossfuzz_coverage_growth.svg">
+                </div>
+                <div id="sqlite3_ossfuzz_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="sqlite3_ossfuzz_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>18895.8</td>
+      <td>322.638015</td>
+      <td>18449.0</td>
+      <td>18641.00</td>
+      <td>18869.0</td>
+      <td>19116.50</td>
+      <td>19401.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>18823.3</td>
+      <td>295.170779</td>
+      <td>18442.0</td>
+      <td>18637.25</td>
+      <td>18830.5</td>
+      <td>18910.75</td>
+      <td>19479.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>18624.4</td>
+      <td>540.177378</td>
+      <td>17915.0</td>
+      <td>18153.50</td>
+      <td>18607.5</td>
+      <td>19051.50</td>
+      <td>19463.0</td>
+    </tr>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>18422.2</td>
+      <td>367.025521</td>
+      <td>17986.0</td>
+      <td>18196.50</td>
+      <td>18321.0</td>
+      <td>18556.25</td>
+      <td>19032.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="sqlite3_ossfuzz_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="sqlite3_ossfuzz_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="sqlite3_ossfuzz_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="sqlite3_ossfuzz_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/sqlite3_ossfuzz/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/sqlite3_ossfuzz/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/sqlite3_ossfuzz/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/sqlite3_ossfuzz/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="sqlite3_ossfuzz" -->
+        
+
+        <div id="systemd_fuzz-link-parser" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">systemd_fuzz-link-parser summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="systemd_fuzz-link-parser_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="systemd_fuzz-link-parser_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#systemd_fuzz-link-parser_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#systemd_fuzz-link-parser_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="systemd_fuzz-link-parser_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="systemd_fuzz-link-parser_coverage_growth.svg">
+                </div>
+                <div id="systemd_fuzz-link-parser_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="systemd_fuzz-link-parser_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>220.3</td>
+      <td>1.418136</td>
+      <td>219.0</td>
+      <td>219.0</td>
+      <td>220.0</td>
+      <td>221.75</td>
+      <td>222.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>220.3</td>
+      <td>1.766981</td>
+      <td>218.0</td>
+      <td>219.0</td>
+      <td>219.5</td>
+      <td>222.00</td>
+      <td>223.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>219.7</td>
+      <td>1.702939</td>
+      <td>217.0</td>
+      <td>219.0</td>
+      <td>219.0</td>
+      <td>221.25</td>
+      <td>222.0</td>
+    </tr>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>219.9</td>
+      <td>1.852926</td>
+      <td>217.0</td>
+      <td>219.0</td>
+      <td>219.0</td>
+      <td>221.50</td>
+      <td>223.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="systemd_fuzz-link-parser_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="systemd_fuzz-link-parser_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="systemd_fuzz-link-parser_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="systemd_fuzz-link-parser_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/systemd_fuzz-link-parser/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/systemd_fuzz-link-parser/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/systemd_fuzz-link-parser/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/systemd_fuzz-link-parser/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="systemd_fuzz-link-parser" -->
+        
+
+        <div id="vorbis_decode_fuzzer" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">vorbis_decode_fuzzer summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="vorbis_decode_fuzzer_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="vorbis_decode_fuzzer_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#vorbis_decode_fuzzer_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#vorbis_decode_fuzzer_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="vorbis_decode_fuzzer_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="vorbis_decode_fuzzer_coverage_growth.svg">
+                </div>
+                <div id="vorbis_decode_fuzzer_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="vorbis_decode_fuzzer_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>1254.0</td>
+      <td>4.642796</td>
+      <td>1246.0</td>
+      <td>1253.25</td>
+      <td>1254.5</td>
+      <td>1255.75</td>
+      <td>1261.0</td>
+    </tr>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>1251.6</td>
+      <td>3.777124</td>
+      <td>1245.0</td>
+      <td>1249.25</td>
+      <td>1252.5</td>
+      <td>1254.00</td>
+      <td>1257.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>1245.5</td>
+      <td>20.887264</td>
+      <td>1188.0</td>
+      <td>1249.25</td>
+      <td>1251.5</td>
+      <td>1254.50</td>
+      <td>1259.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>1249.4</td>
+      <td>6.113737</td>
+      <td>1234.0</td>
+      <td>1249.00</td>
+      <td>1250.0</td>
+      <td>1250.75</td>
+      <td>1258.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="vorbis_decode_fuzzer_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="vorbis_decode_fuzzer_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="vorbis_decode_fuzzer_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="vorbis_decode_fuzzer_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/vorbis_decode_fuzzer/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/vorbis_decode_fuzzer/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/vorbis_decode_fuzzer/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/vorbis_decode_fuzzer/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="vorbis_decode_fuzzer" -->
+        
+
+        <div id="woff2_convert_woff2ttf_fuzzer" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">woff2_convert_woff2ttf_fuzzer summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="woff2_convert_woff2ttf_fuzzer_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="woff2_convert_woff2ttf_fuzzer_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#woff2_convert_woff2ttf_fuzzer_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#woff2_convert_woff2ttf_fuzzer_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="woff2_convert_woff2ttf_fuzzer_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="woff2_convert_woff2ttf_fuzzer_coverage_growth.svg">
+                </div>
+                <div id="woff2_convert_woff2ttf_fuzzer_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="woff2_convert_woff2ttf_fuzzer_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>1137.5</td>
+      <td>4.326918</td>
+      <td>1130.0</td>
+      <td>1134.50</td>
+      <td>1138.0</td>
+      <td>1140.50</td>
+      <td>1144.0</td>
+    </tr>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>1137.9</td>
+      <td>4.383048</td>
+      <td>1133.0</td>
+      <td>1133.75</td>
+      <td>1137.0</td>
+      <td>1142.25</td>
+      <td>1144.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>1130.7</td>
+      <td>5.417051</td>
+      <td>1121.0</td>
+      <td>1128.25</td>
+      <td>1132.0</td>
+      <td>1133.50</td>
+      <td>1137.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>1122.8</td>
+      <td>4.802777</td>
+      <td>1113.0</td>
+      <td>1120.00</td>
+      <td>1124.0</td>
+      <td>1125.75</td>
+      <td>1129.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="woff2_convert_woff2ttf_fuzzer_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="woff2_convert_woff2ttf_fuzzer_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="woff2_convert_woff2ttf_fuzzer_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="woff2_convert_woff2ttf_fuzzer_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/woff2_convert_woff2ttf_fuzzer/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/woff2_convert_woff2ttf_fuzzer/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/woff2_convert_woff2ttf_fuzzer/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/woff2_convert_woff2ttf_fuzzer/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="woff2_convert_woff2ttf_fuzzer" -->
+        
+
+        <div id="zlib_zlib_uncompress_fuzzer" class="section scrollspy">
+
+            <h2 class="green-text text-darken-3">zlib_zlib_uncompress_fuzzer summary</h2>
+
+            <div class="row">
+                <div class="col s6">
+            
+                    <h5 class="center-align">Ranking by median reached code coverage</h5>
+                    <img class="responsive-img materialboxed"
+                         src="zlib_zlib_uncompress_fuzzer_ranking.svg">
+            
+                </div>
+                <div class="col s6">
+                    <h5 class="center-align">Reached code coverage distribution</h5>
+                    <img class="responsive-img materialboxed"
+                         src="zlib_zlib_uncompress_fuzzer_boxplot.svg">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <ul class="tabs">
+            
+                      <li class="tab col s6"><a href="#zlib_zlib_uncompress_fuzzer_code_normal" class="green-text text-darken-3">Code coverage (linear)</a></li>
+                      <li class="tab col s6"><a href="#zlib_zlib_uncompress_fuzzer_code_logscale" class="green-text text-darken-3">Code coverage (log)</a></li>
+            
+                    </ul>
+                </div>
+                <div id="zlib_zlib_uncompress_fuzzer_code_normal" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="zlib_zlib_uncompress_fuzzer_coverage_growth.svg">
+                </div>
+                <div id="zlib_zlib_uncompress_fuzzer_code_logscale" class="col s12">
+                    <h5 class="center-align">Mean code coverage growth over time</h5>
+                    <img class="responsive-img materialboxed"
+                         src="zlib_zlib_uncompress_fuzzer_coverage_growth_logscale.svg">
+                </div>
+            
+                <div class="center-align">
+                    * The error bands show the 95% confidence interval
+                      around the mean code coverage.
+                </div>
+            </div>
+
+            
+
+            
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Sample statistics and statistical significance (code coverage)
+                    </div>
+                    <div class="collapsible-body">
+
+                        <h5 class="center-align">Code coverage sample statistics</h5>
+                        <table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>std</th>
+      <th>min</th>
+      <th>25%</th>
+      <th>median</th>
+      <th>75%</th>
+      <th>max</th>
+    </tr>
+    <tr>
+      <th>fuzzer</th>
+      <th>time</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>darwin</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>458.0</td>
+      <td>3.018462</td>
+      <td>453.0</td>
+      <td>455.25</td>
+      <td>459.0</td>
+      <td>460.75</td>
+      <td>461.0</td>
+    </tr>
+    <tr>
+      <th>darwin_rand</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>457.4</td>
+      <td>2.412928</td>
+      <td>455.0</td>
+      <td>455.25</td>
+      <td>457.0</td>
+      <td>458.75</td>
+      <td>462.0</td>
+    </tr>
+    <tr>
+      <th>mopt</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>458.6</td>
+      <td>4.742245</td>
+      <td>455.0</td>
+      <td>455.00</td>
+      <td>457.0</td>
+      <td>460.75</td>
+      <td>470.0</td>
+    </tr>
+    <tr>
+      <th>afl_2_55_b</th>
+      <th>86400</th>
+      <td>10.0</td>
+      <td>456.4</td>
+      <td>2.011080</td>
+      <td>455.0</td>
+      <td>455.00</td>
+      <td>456.0</td>
+      <td>456.00</td>
+      <td>461.0</td>
+    </tr>
+  </tbody>
+</table>
+                        <br>
+
+                        <div class="row">
+                            <div class="col s6">
+                                <h5 class="center-align">Vargha-Delaney A12 measure</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="zlib_zlib_uncompress_fuzzer_varga_delaney_a12_plot.svg">
+                                    The table summarizes the A12 values from the
+                                    pairwise Vargha-Delaney A measure of effect size.
+                                    Green cells indicate the probability the fuzzer in the
+                                    row will outperform the fuzzer in the column.
+                            </div>
+
+                            <div class="col s6">
+                                <h5 class="center-align">Mann-Whitney U test</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="zlib_zlib_uncompress_fuzzer_mann_whitney_plot.svg">
+                                    The table summarizes the p values of
+                                    pairwise Mann-Whitney U tests.
+                                    Green cells indicate that the reached
+                                    coverage distribution of a given fuzzer pair
+                                    is significantly different.
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Unique code coverage plots
+                    </div>
+                    <div class="collapsible-body">
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Ranking by unique code branches covered</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="zlib_zlib_uncompress_fuzzer_ranking_unique_branch.svg">
+                                    Each bar shows the total number of code branches found by a given fuzzer.
+                                    The colored area shows the number of unique code branches
+                                    (i.e., branches that were not covered by any other fuzzers).
+                            </div>
+                        </div> <!-- row -->
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <h5 class="center-align">Pairwise unique code coverage</h4>
+                                    <img class="responsive-img materialboxed"
+                                         src="zlib_zlib_uncompress_fuzzer_pairwise_unique_coverage_plot.svg">
+                                    Each cell represents the number of code branches covered by the fuzzer
+                                    of the column but not by the fuzzer of the row
+                            </div>
+                        </div> <!-- row -->
+
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="collapsible">
+                <li>
+                    <div class="collapsible-header">
+                        Code coverage reports for each fuzzer on this benchmark
+                    </div>
+                    <div class="collapsible-body">
+                        <div class="collection">
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/zlib_zlib_uncompress_fuzzer/afl_2_55_b/index.html" class="collection-item">afl_2_55_b</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/zlib_zlib_uncompress_fuzzer/darwin/index.html" class="collection-item">darwin</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/zlib_zlib_uncompress_fuzzer/darwin_rand/index.html" class="collection-item">darwin_rand</a>
+                            
+                            <a href="/opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/coverage/reports/zlib_zlib_uncompress_fuzzer/mopt/index.html" class="collection-item">mopt</a>
+                            
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            
+
+        </div> <!-- id="zlib_zlib_uncompress_fuzzer" -->
+        
+
+        <div id="data" class="section scrollspy">
+            <h2 class="green-text text-darken-3">experiment data</h2>
+            You can download the raw data for this report <a href="data.csv.gz">here</a>.
+
+            <br><br>
+            Check out the <a href="https://google.github.io/fuzzbench/developing-fuzzbench/custom_analysis_and_reports">documentation</a> on how to create customized reports using this data.
+            Also see some example Colab notebooks for doing custom analysis on the data <a href="https://github.com/google/fuzzbench/tree/master/analysis/notebooks">here</a>.
+
+            
+            <br><br>
+            The experiment was conducted using this FuzzBench commit:
+            <a href="https://github.com/google/fuzzbench/commits/39b9e09e9d235511aac4631e49b4607db83e5236">39b9e09e9d235511aac4631e49b4607db83e5236</a>
+
+            <br><br>
+            To reproduce this experiment run the following commands in your FuzzBench repo:</a><br>
+            <code>
+            # Check out the right commit. <br>
+            git checkout 39b9e09e9d235511aac4631e49b4607db83e5236 <br>
+            # Download the internal config file. <br>
+            curl https://storage.googleapis.com//opt/fuzzbench-experiments/darwin-eval/experiment-data/darwin-eval/input/config/experiment.yaml >  /tmp/experiment-config.yaml<br>
+            make install-dependencies <br>
+            # Launch the experiment using paramters from the internal config file. <br>
+            PYTHONPATH=. python experiment/reproduce_experiment.py -c /tmp/experiment-config.yaml -e &lt;new_experiment_name&gt;
+            </code>
+
+            
+
+            
+            <br><br>
+            Experiment Description:<br><br>
+            (None,)
+            
+        </div>    <!-- id="data" -->
+
+    </div> <!-- class="col" -->
+
+    <div class="col hide-on-med-and-down l2">
+        <ul class="section table-of-contents">
+            <li><a href="#summary">experiment summary</a></li>
+            
+            <li><a href="#bloaty_fuzz_target">bloaty_fuzz_target</a></li>
+            
+            <li><a href="#curl_curl_fuzzer_http">curl_curl_fuzzer_http</a></li>
+            
+            <li><a href="#freetype2_ftfuzzer">freetype2_ftfuzzer</a></li>
+            
+            <li><a href="#harfbuzz_hb-shape-fuzzer">harfbuzz_hb-shape-fuzzer</a></li>
+            
+            <li><a href="#libjpeg-turbo_libjpeg_turbo_fuzzer">libjpeg-turbo_libjpeg_turbo_fuzzer</a></li>
+            
+            <li><a href="#libpng_libpng_read_fuzzer">libpng_libpng_read_fuzzer</a></li>
+            
+            <li><a href="#libxml2_xml">libxml2_xml</a></li>
+            
+            <li><a href="#libxslt_xpath">libxslt_xpath</a></li>
+            
+            <li><a href="#mbedtls_fuzz_dtlsclient">mbedtls_fuzz_dtlsclient</a></li>
+            
+            <li><a href="#openssl_x509">openssl_x509</a></li>
+            
+            <li><a href="#openthread_ot-ip6-send-fuzzer">openthread_ot-ip6-send-fuzzer</a></li>
+            
+            <li><a href="#proj4_proj_crs_to_crs_fuzzer">proj4_proj_crs_to_crs_fuzzer</a></li>
+            
+            <li><a href="#re2_fuzzer">re2_fuzzer</a></li>
+            
+            <li><a href="#sqlite3_ossfuzz">sqlite3_ossfuzz</a></li>
+            
+            <li><a href="#systemd_fuzz-link-parser">systemd_fuzz-link-parser</a></li>
+            
+            <li><a href="#vorbis_decode_fuzzer">vorbis_decode_fuzzer</a></li>
+            
+            <li><a href="#woff2_convert_woff2ttf_fuzzer">woff2_convert_woff2ttf_fuzzer</a></li>
+            
+            <li><a href="#zlib_zlib_uncompress_fuzzer">zlib_zlib_uncompress_fuzzer</a></li>
+            
+            <li><a href="#data">experiment data</a></li>
+        </ul>
+    </div>
+
+    </div> <!-- class="row" -->
+    </div> <!-- class="container" -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+     M.AutoInit();
+     document.addEventListener('DOMContentLoaded', function() {
+         var toc = document.querySelectorAll('.table-of-contents');
+         M.Pushpin.init(toc);
+
+         var scrollspy_elems = document.querySelectorAll('.scrollspy');
+         var scrollspy_options = {scrollOffset: 0};
+         M.ScrollSpy.init(scrollspy_elems, scrollspy_options);
+
+         var tabs_elems = document.querySelectorAll('.tabs');
+         var tabs_options = {duration: 500};
+         var instance = M.Tabs.init(tabs_elems, tabs_options);
+     });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.2/anchor.min.js"></script>
+    <script>
+     anchors.add();
+    </script>
+</body>
+</html>

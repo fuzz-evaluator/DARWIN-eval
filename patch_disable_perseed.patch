@@ -1,0 +1,28 @@
+diff --git a/fuzzers/darwin/fuzzer.py b/fuzzers/darwin/fuzzer.py
+index 160ee4a..19641c7 100755
+--- a/fuzzers/darwin/fuzzer.py
++++ b/fuzzers/darwin/fuzzer.py
+@@ -121,7 +121,8 @@ def run_afl_fuzz(input_corpus,
+         command.extend(additional_flags)
+     # splicing mutations are disabled because this appears to be not supported
+     # command.append('-s')
+-    command.append('-p')
++    # per seed mutations disabled upon advice offered by authors
++    # command.append('-p')
+     command.append('-L0')
+     dictionary_path = utils.get_dictionary_path(target_binary)
+     if dictionary_path:
+diff --git a/fuzzers/darwin_rand/fuzzer.py b/fuzzers/darwin_rand/fuzzer.py
+index 160ee4a..7a68d27 100755
+--- a/fuzzers/darwin_rand/fuzzer.py
++++ b/fuzzers/darwin_rand/fuzzer.py
+@@ -121,7 +121,8 @@ def run_afl_fuzz(input_corpus,
+         command.extend(additional_flags)
+     # splicing mutations are disabled because this appears to be not supported
+     # command.append('-s')
+-    command.append('-p')
++    # per-seed mutation disabled upon author recommendation
++    # command.append('-p')
+     command.append('-L0')
+     dictionary_path = utils.get_dictionary_path(target_binary)
+     if dictionary_path:
